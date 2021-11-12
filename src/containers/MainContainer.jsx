@@ -1,10 +1,10 @@
-import { Typography, Container, Grid, Avatar, Box, Card, Button } from '@mui/material';
+import { Typography, Container, Grid, Avatar, Box, Card, Button, ListItem } from '@mui/material';
 import Typical from 'react-typical';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
 
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
 	rock        : {
 		height                    : '90vh',
@@ -36,12 +36,12 @@ const useStyles = makeStyles({
 		lineHeight      : 2,
 		backgroundColor : '#4A148C',
 		color           : '#ffffff',
-		margin:' 2% 5%'
+		margin          : ' 2% 5%'
 	},
 	buttonCont  : {
 		marginLeft : '50%'
 	},
-	buttonCont2  : {
+	buttonCont2 : {
 		marginLeft : '30%'
 	},
 	second      : {
@@ -96,6 +96,8 @@ const useStyles = makeStyles({
 	// }
 });
 const Maincontainer = () => {
+	let history = useHistory();
+
 	const classes = useStyles();
 
 	const feature = [
@@ -624,7 +626,13 @@ const Maincontainer = () => {
 							<h2>{page.title}</h2>
 							<Typography>{page.description}</Typography>
 							<Router>
-								<Link to={page.Link}>{page.button}</Link>
+								<ListItem
+									button
+									onClick={() => {
+										history.push(page.Link);
+									}}>
+									{page.button}
+								</ListItem>
 							</Router>
 						</Card>
 					</Grid>
